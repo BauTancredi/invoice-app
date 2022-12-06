@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest --watchAll",
     "lint": "eslint . --ext .tsx,.ts,.js,.jsx",
     "lint-and-fix": "eslint . --ext .tsx,.ts,.js,.jsx --fix",
-    "prettier-format": "prettier --config .prettierrc \"**/*.{ts,tsx,js,jsx}\" --write"
+    "prettier-format": "prettier --config .prettierrc \"**/*.{ts,tsx,js,jsx}\" --write",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "react": "^18.2.0",

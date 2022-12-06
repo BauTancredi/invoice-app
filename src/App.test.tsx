@@ -12,6 +12,6 @@ describe("App", () => {
   test("renders Hello World text", () => {
     const { getByText } = render(<App />);
 
-    expect(getByText("Hello Wosrld")).toBeInTheDocument();
+    expect(getByText("Hello World")).toBeInTheDocument();
   });
 });

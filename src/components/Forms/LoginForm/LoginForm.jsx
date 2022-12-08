@@ -8,7 +8,7 @@ import schema from './schemas/login-form-schema';
 import callEndpoint from '../services/call-endpoint';
 
 export default function LoginForm() {
-  const [, setCookie] = useCookies(['user']);
+  const [cookie, setCookie] = useCookies(['user']);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
@@ -57,6 +57,9 @@ export default function LoginForm() {
 
     setCookie('user', token, { path: '/' });
     reset();
+
+    // redirect to home
+    // if (cookie) console.log('cookie', cookie);
   };
 
   return (

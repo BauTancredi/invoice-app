@@ -1,4 +1,5 @@
-import LoginForm from './components/Forms/LoginForm/LoginForm';
+// import LoginForm from './components/Forms/LoginForm/LoginForm';
+import SignUpForm from './components/Forms/SignUpForm/SignUpForm';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         }}
       />
       <div className="w-full flex items-center justify-center">
-        <LoginForm />
+        {/* <LoginForm /> */}
+        <SignUpForm />
       </div>
     </div>
   );

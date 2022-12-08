@@ -10,7 +10,7 @@ export default function Header() {
 
         <div className="w-1/3 flex justify-between items-center ">
           <object data="/src/assets/icon-moon.svg"> </object>
-
+          <hr className="h-16  border-0 bg-gray-600 w-px" />
           <img
             src="/src/assets/image-avatar.jpg"
             alt="profile-avatar"

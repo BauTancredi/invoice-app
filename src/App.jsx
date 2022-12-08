@@ -16,7 +16,7 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute cookie={cookie}>
+            <ProtectedRoute cookie={cookie} redirectPath="/login">
               <p>Hola</p>
             </ProtectedRoute>
           }

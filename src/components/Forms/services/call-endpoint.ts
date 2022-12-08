@@ -1,4 +1,17 @@
-export default async function callEndpoint(method, endpoint, body) {
+interface ICallEndpoint {
+  method: string;
+  endpoint: string;
+  body: {
+    email: string;
+    password: string;
+  };
+}
+
+export default async function callEndpoint({
+  method,
+  endpoint,
+  body
+}: ICallEndpoint) {
   const baseUrl = 'http://localhost:8000/api';
 
   try {

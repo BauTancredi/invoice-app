@@ -1,21 +1,34 @@
-import LoginForm from './components/Forms/LoginForm/LoginForm';
-import SignUpForm from './components/Forms/SignUpForm/SignUpForm';
+import { Route, Routes } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+import LoginForm from './components/forms/LoginForm/LoginForm';
+import SignUpForm from './components/forms/SignUpForm/SignUpForm';
+import Layout from './components/layout/Layout';
+import ProtectedRoute from './components/routes/ProtectedRoute';
+import Error404 from './components/errors/Error404';
 
 function App() {
+  const [cookie, setCookie] = useCookies(['user']);
+
   return (
-    <div className="flex">
-      <aside
-        style={{
-          backgroundColor: 'lightblue',
-          height: '100vh',
-          width: '10vw'
-        }}
-      />
-      <div className="w-full flex items-center justify-center">
-        <LoginForm />
-        {/* <SignUpForm /> */}
-      </div>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute cookie={cookie}>
+              <p>Hola</p>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={<LoginForm cookie={cookie} setCookie={setCookie} />}
+        />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="*" element={<Error404 />} />
+      </Route>
+    </Routes>
   );
 }
 

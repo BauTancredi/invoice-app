@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCookies } from 'react-cookie';
+import { Link, Navigate } from 'react-router-dom';
 
 import CustomImput from '../CustomImput';
+import InvalidCredentials from '../../errors/InvalidCredentials';
 import schema from './schemas/login-form-schema';
 import callEndpoint from '../services/call-endpoint';
 
-export default function LoginForm() {
-  const [cookie, setCookie] = useCookies(['user']);
+export default function LoginForm({ cookie, setCookie }) {
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
@@ -28,23 +28,12 @@ export default function LoginForm() {
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
 
-  const renderError = (message) => (
-    <div
-      className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded text-center"
-      role="alert"
-    >
-      <p className="font-bold">Error!</p>
-      <p>{message}</p>
-    </div>
-  );
-
   const onSubmit = async () => {
     const res = await callEndpoint('POST', '/users/login', {
       email: emailWatch,
       password: passwordWatch
     });
 
-    // invalid credentials
     if (res === 401) {
       setInvalidCredentials(true);
 
@@ -57,10 +46,9 @@ export default function LoginForm() {
 
     setCookie('user', token, { path: '/' });
     reset();
-
-    // redirect to home
-    // if (cookie) console.log('cookie', cookie);
   };
+
+  if (cookie.user) return <Navigate to="/" />;
 
   return (
     <div className="bg-gray-300 p-5 w-10/12 md:w-96 rounded">
@@ -90,13 +78,15 @@ export default function LoginForm() {
             Login
           </button>
           <div className="flex justify-center">
-            <button type="button" className="text-sm">
+            <Link to="/signup" className="text-sm">
               Sign up
-            </button>
+            </Link>
           </div>
         </form>
       </FormProvider>
-      {invalidCredentials && renderError('Invalid credentials')}
+      {invalidCredentials && (
+        <InvalidCredentials message="Invalid credentials" />
+      )}
     </div>
   );
 }

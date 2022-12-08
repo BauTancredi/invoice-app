@@ -2,13 +2,14 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCookies } from 'react-cookie';
+import { Link, Navigate } from 'react-router-dom';
 
 import CustomImput from '../CustomImput';
 import schema from './schemas/signup-form-schema';
 import callEndpoint from '../services/call-endpoint';
 
 export default function LoginForm() {
-  const [, setCookie] = useCookies(['user']);
+  const [cookie, setCookie] = useCookies(['user']);
   const {
     register,
     handleSubmit,
@@ -42,6 +43,8 @@ export default function LoginForm() {
     reset();
   };
 
+  if (cookie.user) return <Navigate to="/" />;
+
   return (
     <div className="bg-gray-300 p-5 w-10/12 md:w-96 rounded">
       <FormProvider {...{ register, errors }}>
@@ -60,9 +63,9 @@ export default function LoginForm() {
             Sign up
           </button>
           <div className="flex justify-center">
-            <button type="button" className="text-sm">
+            <Link to="/login" className="text-sm text-center">
               Login
-            </button>
+            </Link>
           </div>
         </form>
       </FormProvider>

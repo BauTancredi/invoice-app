@@ -10,6 +10,10 @@ export default async function callEndpoint(method, endpoint, body) {
       body: JSON.stringify(body)
     });
 
+    if (!response.ok) {
+      return response.status;
+    }
+
     return await response.json();
   } catch (error) {
     throw new Error('Something went wrong');

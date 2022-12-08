@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCookies } from 'react-cookie';
+
 import CustomImput from './CustomImput';
 import schema from './schemas/login-form-schema';
 import callEndpoint from '../services/call-endpoint';
 
 export default function LoginForm() {
   const [, setCookie] = useCookies(['user']);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
     handleSubmit,
@@ -26,6 +28,16 @@ export default function LoginForm() {
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
 
+  const renderError = (message) => (
+    <div
+      className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded text-center"
+      role="alert"
+    >
+      <p className="font-bold">Error!</p>
+      <p>{message}</p>
+    </div>
+  );
+
   const onSubmit = async () => {
     const res = await callEndpoint('POST', '/users/login', {
       email: emailWatch,
@@ -33,9 +45,13 @@ export default function LoginForm() {
     });
 
     // invalid credentials
-    if (res.status === 400) {
+    if (res === 401) {
+      setInvalidCredentials(true);
+
       return;
     }
+
+    if (invalidCredentials) setInvalidCredentials(false);
 
     const { token } = res;
 
@@ -77,6 +93,7 @@ export default function LoginForm() {
           </div>
         </form>
       </FormProvider>
+      {invalidCredentials && renderError('Invalid credentials')}
     </div>
   );
 }

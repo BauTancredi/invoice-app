@@ -1,5 +1,5 @@
-import LoginForm from './components/Forms/LoginForm/LoginForm';
-import SignUpForm from './components/Forms/SignUpForm/SignUpForm';
+import LoginForm from './pages/LoginForm';
+import SignUpForm from './pages/SignUpForm';
 
 function App() {
   return (

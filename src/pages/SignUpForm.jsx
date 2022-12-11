@@ -1,14 +1,13 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCookies } from "react-cookie";
+import { Link, Navigate } from "react-router-dom";
 
 import CustomInput from "../components/CustomInput";
 import schema from "../schemas/signup-form-schema";
 import callEndpoint from "../services/call-endpoint";
 
-export default function LoginForm() {
-  const [, setCookie] = useCookies(["user"]);
+export default function LoginForm({ cookie, setCookie }) {
   const {
     register,
     handleSubmit,
@@ -24,6 +23,8 @@ export default function LoginForm() {
     mode: "onChange",
     resolver: zodResolver(schema),
   });
+
+  if (cookie.user) return <Navigate to="/" />;
 
   const emailWatch = watch("email");
   const passwordWatch = watch("password");
@@ -60,9 +61,9 @@ export default function LoginForm() {
             Sign up
           </button>
           <div className="flex justify-center">
-            <button className="text-sm" type="button">
+            <Link className="text-sm text-center" to="/login">
               Login
-            </button>
+            </Link>
           </div>
         </form>
       </FormProvider>

@@ -1,32 +1,29 @@
-import { Route, Routes } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { Route, Routes } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
-import LoginForm from './components/forms/LoginForm/LoginForm';
-import SignUpForm from './components/forms/SignUpForm/SignUpForm';
-import Layout from './components/layout/Layout';
-import ProtectedRoute from './components/routes/ProtectedRoute';
-import Error404 from './components/errors/Error404';
+import LoginForm from "./pages/LoginForm";
+import SignUpForm from "./pages/SignUpForm";
+import Layout from "./components/layout/Layout";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
+import Error404 from "./components/errors/Error404";
 
 function App() {
-  const [cookie, setCookie] = useCookies(['user']);
+  const [cookie, setCookie] = useCookies(["user"]);
 
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route
-          path="/"
           element={
             <ProtectedRoute cookie={cookie} redirectPath="/login">
               <p>Hola</p>
             </ProtectedRoute>
           }
+          path="/"
         />
-        <Route
-          path="/login"
-          element={<LoginForm cookie={cookie} setCookie={setCookie} />}
-        />
-        <Route path="/signup" element={<SignUpForm />} />
-        <Route path="*" element={<Error404 />} />
+        <Route element={<LoginForm cookie={cookie} setCookie={setCookie} />} path="/login" />
+        <Route element={<SignUpForm cookie={cookie} setCookie={setCookie} />} path="/signup" />
+        <Route element={<Error404 />} path="*" />
       </Route>
     </Routes>
   );

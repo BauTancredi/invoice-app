@@ -1,13 +1,13 @@
 export default async function callEndpoint(method, endpoint, body) {
-  const baseUrl = 'http://localhost:8000/api';
+  const baseUrl = "http://localhost:8000/api";
 
   try {
     const response = await fetch(baseUrl + endpoint, {
       method,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -16,6 +16,6 @@ export default async function callEndpoint(method, endpoint, body) {
 
     return await response.json();
   } catch (error) {
-    throw new Error('Something went wrong');
+    throw new Error("Something went wrong");
   }
 }

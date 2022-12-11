@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useCookies } from 'react-cookie';
+import React, { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCookies } from "react-cookie";
 
-import CustomInput from '../components/CustomInput';
-import schema from '../schemas/login-form-schema';
-import callEndpoint from '../services/call-endpoint';
+import CustomInput from "../components/CustomInput";
+import schema from "../schemas/login-form-schema";
+import callEndpoint from "../services/call-endpoint";
 
 export default function LoginForm() {
-  const [cookie, setCookie] = useCookies(['user']);
+  const [cookie, setCookie] = useCookies(["user"]);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isDirty, isValid },
-    reset
+    reset,
   } = useForm({
     defaultValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
-    mode: 'onChange',
-    resolver: zodResolver(schema)
+    mode: "onChange",
+    resolver: zodResolver(schema),
   });
 
-  const emailWatch = watch('email');
-  const passwordWatch = watch('password');
+  const emailWatch = watch("email");
+  const passwordWatch = watch("password");
 
   const renderError = (message) => (
     <div
@@ -39,9 +39,9 @@ export default function LoginForm() {
   );
 
   const onSubmit = async () => {
-    const res = await callEndpoint('POST', '/users/login', {
+    const res = await callEndpoint("POST", "/users/login", {
       email: emailWatch,
-      password: passwordWatch
+      password: passwordWatch,
     });
 
     if (res === 401) {
@@ -54,7 +54,7 @@ export default function LoginForm() {
 
     const { token } = res;
 
-    setCookie('user', token, { path: '/' });
+    setCookie("user", token, { path: "/" });
     reset();
 
     // redirect to home
@@ -66,36 +66,24 @@ export default function LoginForm() {
       <FormProvider {...{ register, errors }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className="text-center m-2 text-3xl font-bold">Login</h2>
-          <CustomInput
-            name="email"
-            label="Email"
-            type="email"
-            required
-            disabled={false}
-          />
+          <CustomInput required disabled={false} label="Email" name="email" type="email" />
           <div className="pb-4" />
-          <CustomInput
-            name="password"
-            label="Password"
-            type="password"
-            required
-            disabled={false}
-          />
+          <CustomInput required disabled={false} label="Password" name="password" type="password" />
           <button
-            type="submit"
             className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 rounded hover:bg-primary-500 cursor-pointer"
             disabled={!isDirty || !isValid}
+            type="submit"
           >
             Login
           </button>
           <div className="flex justify-center">
-            <button type="button" className="text-sm">
+            <button className="text-sm" type="button">
               Sign up
             </button>
           </div>
         </form>
       </FormProvider>
-      {invalidCredentials && renderError('Invalid credentials')}
+      {invalidCredentials && renderError("Invalid credentials")}
     </div>
   );
 }

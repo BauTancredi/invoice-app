@@ -9,6 +9,8 @@ import schema from "../schemas/login-form-schema";
 import callEndpoint from "../services/call-endpoint";
 
 export default function LoginForm({ cookie, setCookie }) {
+  const [Loading, setLoading] = useState(false);
+  
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
@@ -50,8 +52,12 @@ export default function LoginForm({ cookie, setCookie }) {
     reset();
   };
 
+  const handleClick = () => {
+    setLoading(true);
+  };
+
   return (
-    <div className="p-5 bg-white w-10/12 md:w-96 rounded">
+    <div className="p-5 bg-white w-10/12 md:w-96 rounded shadow-md">
       <FormProvider {...{ register, errors }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className="text-center m-2 text-3xl font-bold">Login</h2>
@@ -61,9 +67,10 @@ export default function LoginForm({ cookie, setCookie }) {
           <button
             className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 font-bold rounded hover:bg-primary-500 cursor-pointer"
             disabled={!isDirty || !isValid}
+            onClick={handleClick}
             type="submit"
           >
-            Login
+             {Loading ? <p> loading ...</p> : <p>Log in</p>}
           </button>
           <div className="flex justify-center">
             <Link className="text-sm" to="/signup">

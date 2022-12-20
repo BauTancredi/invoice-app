@@ -3,6 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, Navigate } from "react-router-dom";
 
+
 import CustomInput from "../components/CustomInput";
 import InvalidCredentials from "../components/errors/InvalidCredentials";
 import schema from "../schemas/login-form-schema";
@@ -67,10 +68,10 @@ export default function LoginForm({ cookie, setCookie }) {
           <button
             className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 font-bold rounded hover:bg-primary-500 cursor-pointer"
             disabled={!isDirty || !isValid}
+            type="button"
             onClick={handleClick}
-            type="submit"
           >
-             {Loading ? <p> loading ...</p> : <p>Log in</p>}
+            {Loading ? <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div> : <p>Log In</p>}
           </button>
           <div className="flex justify-center">
             <Link className="text-sm" to="/signup">

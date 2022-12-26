@@ -3,10 +3,10 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, Navigate } from "react-router-dom";
 
-
 import CustomInput from "../components/CustomInput";
 import schema from "../schemas/signup-form-schema";
 import callEndpoint from "../services/call-endpoint";
+import Spinner from "../components/errors/Spinner";
 
 export default function LoginForm({ cookie, setCookie }) {
   const [Loading, setLoading] = useState(false);
@@ -66,9 +66,7 @@ export default function LoginForm({ cookie, setCookie }) {
             onClick={handleClick}
             type="submit"
           >
-
-            {Loading ? <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div> : <p>Sign up</p>}
-          
+            {Loading ? <Spinner /> : <p>Sign up</p>}
           </button>
 
           <div className="flex justify-center">

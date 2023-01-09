@@ -34,6 +34,7 @@ export default function LoginForm({ cookie, setCookie }) {
   const nameWatch = watch("name");
 
   const onSubmit = async () => {
+    setLoading(true);
     const res = await callEndpoint("POST", "/users/signup", {
       email: emailWatch,
       password: passwordWatch,
@@ -44,10 +45,7 @@ export default function LoginForm({ cookie, setCookie }) {
 
     setCookie("user", token, { path: "/" });
     reset();
-  };
-
-  const handleClick = () => {
-    setLoading(true);
+    setLoading(false);
   };
 
   return (
@@ -63,7 +61,6 @@ export default function LoginForm({ cookie, setCookie }) {
           <button
             className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 font-bold rounded hover:bg-primary-500 cursor-pointer"
             disabled={!isDirty || !isValid}
-            onClick={handleClick}
             type="submit"
           >
             {Loading ? <Spinner /> : <p>Sign up</p>}

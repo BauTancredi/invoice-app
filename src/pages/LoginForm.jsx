@@ -34,6 +34,7 @@ export default function LoginForm({ cookie, setCookie }) {
   const passwordWatch = watch("password");
 
   const onSubmit = async () => {
+    setLoading(true);
     const res = await callEndpoint("POST", "/users/login", {
       email: emailWatch,
       password: passwordWatch,
@@ -51,10 +52,7 @@ export default function LoginForm({ cookie, setCookie }) {
 
     setCookie("user", token, { path: "/" });
     reset();
-  };
-
-  const handleClick = () => {
-    setLoading(true);
+    setLoading(false);
   };
 
   return (
@@ -81,7 +79,6 @@ export default function LoginForm({ cookie, setCookie }) {
             className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 font-bold rounded hover:bg-primary-500 cursor-pointer"
             disabled={!isDirty || !isValid}
             type="button"
-            onClick={handleClick}
           >
             {Loading ? <Spinner /> : <p>Log In</p>}
           </button>

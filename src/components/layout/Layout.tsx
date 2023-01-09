@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div className="flex">
+    <div className="flex bg-light-100">
       <aside
         style={{
           backgroundColor: "lightblue",

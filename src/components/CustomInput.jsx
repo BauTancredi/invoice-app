@@ -14,8 +14,10 @@ export default function CustomImput({ name, label, type }) {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={name}>{label}</label>
-      <input id={name} type={type} {...register(name)} />
+      <label className="text-gray-700" htmlFor={name}>
+        {label}
+      </label>
+      <input className="border " id={name} type={type} {...register(name)} />
       {errors && errorMessage(errors, name)}
     </div>
   );

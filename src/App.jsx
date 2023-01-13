@@ -10,14 +10,7 @@ import Error404 from "./components/errors/Error404";
 
 function App() {
   const [cookie, setCookie] = useCookies(["user"]);
-  const token = cookie.user;
-  
-  const decoded = jwtDecode(token);
-  
-  const currentUser = decoded.user
-
-  console.log(decoded.user);
-
+  const currentUser = jwtDecode(cookie.user).user;
 
   return (
     <Routes>

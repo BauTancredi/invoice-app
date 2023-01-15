@@ -10,7 +10,7 @@ import Error404 from "./components/errors/Error404";
 
 function App() {
   const [cookie, setCookie] = useCookies(["user"]);
-  const currentUser = jwtDecode(cookie.user).user;
+  const { user } = jwtDecode(cookie.user);
 
   return (
     <Routes>
@@ -18,7 +18,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute cookie={cookie} redirectPath="/login">
-              <p>Hola, {currentUser.name}</p>
+              <p>Hola, {user.name} </p>
             </ProtectedRoute>
           }
           path="/"

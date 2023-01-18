@@ -7,8 +7,6 @@ const Drawer = () => {
   const { user } = jwtDecode(cookie.user);
 
   const checkUser = () => {
-    console.log(user);
-
     if (user) {
       return true;
     } else {

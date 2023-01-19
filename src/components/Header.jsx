@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 import DarkModeIcon from "./icons/DarkModeIcon";
 import Avatar from "./icons/Avatar";
 import Logo from "./icons/Logo";
 
-export default function Header() {
+export default function Header(props) {
   return (
-    <header className="fixed w-screen h-20 top-0 bg-gray-700 flex items-center justify-between lg:h-screen lg:left-0 lg:w-20 lg:rounded-r-2xl lg:flex-col">
+    <header className="fixed w-screen h-20 top-0 bg-gray-700 flex items-center justify-between lg:h-screen lg:left-0 lg:w-20 lg:rounded-r-2xl lg:flex-col z-20">
       <div className=" w-20 h-20 bg-primary-500 flex justify-center items-center rounded-r-2xl relative overflow-hidden cursor-pointer lg:w-full lg:h-20 after:absolute after:top-2/4 after:left-0 after:w-full after:h-full after:bg-primary-400 after:rounded-l-2xl after:transition-all after:duration-300 hover:after:top-1/4">
         <Logo />
       </div>
@@ -17,7 +17,10 @@ export default function Header() {
             <DarkModeIcon />
           </div>
         </div>
-        <div className="flex w-3/6 items-center justify-center h-full lg:w-full lg:h-20">
+        <div
+          className="flex w-3/6 items-center justify-center h-full lg:w-full lg:h-20  cursor-pointer"
+          onClick={props.handleClick}
+        >
           <Avatar />
         </div>
       </div>

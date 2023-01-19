@@ -15,7 +15,7 @@ const Drawer = () => {
   };
 
   return (
-    <div className=" max-w-3xl top-0 left-0 p-24 h-screen fixed w-full overflow-y-auto">
+    <div className=" max-w-3xl top-0 left-0 p-24 h-screen fixed w-full overflow-y-auto border-8 bg-slate-400 z-10">
       <div> {checkUser() ? <p>{user.name}</p> : <p>Please Log In</p>} </div>
     </div>
   );

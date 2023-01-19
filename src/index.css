@@ -27,3 +27,20 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* Drawer */
+
+.drawer-animation {
+  /* transform: none;
+  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms; */
+  opacity: 0;
+  transform: translate3d(-50px, 0, 0);
+
+  cursor: pointer;
+  transition: 0.25s all ease-in-out;
+}
+
+.drawer-animation-toggle {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}

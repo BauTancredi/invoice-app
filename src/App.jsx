@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import jwtDecode from "jwt-decode";
 
 import LoginForm from "./pages/LoginForm";
 import SignUpForm from "./pages/SignUpForm";
@@ -9,6 +10,7 @@ import Error404 from "./components/errors/Error404";
 
 function App() {
   const [cookie, setCookie] = useCookies(["user"]);
+  const { user } = jwtDecode(cookie.user);
 
   return (
     <Routes>
@@ -16,7 +18,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute cookie={cookie} redirectPath="/login">
-              <p>Hola</p>
+              <p>Hola, {user.name} </p>
             </ProtectedRoute>
           }
           path="/"

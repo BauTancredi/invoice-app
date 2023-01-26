@@ -23,13 +23,13 @@ export default function Layout() {
         {!drawer ? (
           <Drawer
             styles={
-              "drawer-animation-toggle max-w-3xl top-0 left-0 h-screen fixed w-full overflow-y-auto rounded-r-3xl bg-white z-10 pl-20 shadow-sm"
+              "drawer-animation-open  max-w-2xl top-0 left-0 h-screen fixed w-full overflow-y-auto rounded-r-3xl bg-white z-10 pl-20 shadow-xl"
             }
           />
         ) : (
           <Drawer
             styles={
-              "drawer-animation max-w-3xl top-0 left-0 h-screen fixed w-full overflow-y-auto rounded-r-3xl bg-white z-10 pl-20 shadow-sm"
+              "drawer-animation-closed shadow-xl max-w-2xl top-0 left-0 h-screen fixed w-full overflow-y-auto rounded-r-3xl bg-white z-10 pl-20 shadow-xl"
             }
           />
         )}

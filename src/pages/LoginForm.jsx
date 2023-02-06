@@ -56,15 +56,15 @@ export default function LoginForm({ cookie, setCookie }) {
   };
 
   return (
-    <div className="p-5 bg-white w-10/12 md:w-96 rounded shadow-md">
+    <div className="w-10/12 rounded bg-white p-5 shadow-md md:w-96">
       <FormProvider {...{ register, errors }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-center m-2 text-3xl font-bold">Login</h2>
+          <h2 className="m-2 text-center text-3xl font-bold">Login</h2>
           <CustomInput required disabled={false} label="Email" name="email" type="email" />
           <div className="pb-4" />
           <CustomInput required disabled={false} label="Password" name="password" type="password" />
           <button
-            className="w-full mt-8 my-4 bg-primary-400 p-2 text-gray-100 font-bold rounded hover:bg-primary-500 cursor-pointer"
+            className="bg-primary-400 hover:bg-primary-500 my-4 mt-8 w-full cursor-pointer rounded p-2 font-bold text-gray-100"
             disabled={!isDirty || !isValid}
           >
             {loading ? <Spinner /> : <p>Log In</p>}

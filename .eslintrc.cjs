@@ -8,6 +8,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
   ],
   plugins: ["react", "prettier", "import", "@typescript-eslint"],
   parser: "@typescript-eslint/parser",
@@ -79,5 +80,6 @@ module.exports = {
       { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
       { blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"] },
     ],
+    "tailwindcss/no-custom-classname": "off",
   },
 };

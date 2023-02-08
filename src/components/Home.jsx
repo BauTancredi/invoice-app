@@ -4,11 +4,22 @@ import InlineInvoice from "./InlineInvoice";
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-screen">
       <h1>Home</h1>
-      <InlineInvoice />
-      <InlineInvoice />
-      <InlineInvoice />
+      <div className="my-10 overflow-y-scroll max-h-[90%] ">
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+        <InlineInvoice />
+      </div>
     </div>
   );
 };

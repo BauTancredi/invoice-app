@@ -29,3 +29,7 @@ body {
 }
 
 /* inline invoice */
+
+.inline-hover:hover {
+  transition: 0.5s ease;
+}

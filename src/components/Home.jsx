@@ -1,11 +1,12 @@
 import React from "react";
 
+import Header from "./Header";
 import InlineInvoice from "./InlineInvoice";
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <Header />
       <InlineInvoice />
       <InlineInvoice />
       <InlineInvoice />

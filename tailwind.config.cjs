@@ -5,8 +5,9 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          200: "hsla(252, 100%, 83%, 1)",
+          300: "hsla(252, 100%, 73%, 1)",
           400: "hsla(252, 94%, 67%, 1)",
-          500: "hsla(252, 100%, 73%, 1)",
         },
         secondary: {
           400: "hsla(231, 20%, 27%, 1)",
